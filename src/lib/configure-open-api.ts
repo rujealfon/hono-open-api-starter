@@ -1,3 +1,4 @@
+import { swaggerUI } from "@hono/swagger-ui";
 import { Scalar } from "@scalar/hono-api-reference";
 
 import type { AppOpenAPI } from "./types";
@@ -14,7 +15,14 @@ export default function configureOpenAPI(app: AppOpenAPI) {
   });
 
   app.get(
-    "/reference",
+    "/swagger",
+    swaggerUI({
+      url: "/doc",
+    }),
+  );
+
+  app.get(
+    "/scalar",
     Scalar({
       url: "/doc",
       theme: "kepler",
